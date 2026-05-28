@@ -2,7 +2,14 @@ from sentence_transformers import SentenceTransformer
 
 class EmbeddingService:
 
-    ### Implement Method generate_embedding
+    def __init__(self, model_name: str = "paraphrase-multilingual-MiniLM-L12-v2"):
+        self.model = SentenceTransformer(model_name)
+
+
     def generate_embedding(self, text: str):
 
-        return 0
+        if not text.strip():
+            raise ValueError("Text cannot be empty")
+        
+        return self.model.encode(text)
+    
